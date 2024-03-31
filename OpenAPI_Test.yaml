@@ -3,7 +3,7 @@ info:
   title: Connectivity Ranking API
   version: 1.0.0
 paths:
-  /lightning/nodes/isp/{number}:
+  /lightning/nodes/rankings/isp/{number}:
     get:
       summary: Get rankings of Lightning Network nodes by ISP
       description: Retrieve a list of Lightning Network nodes ranked by their ISP, along with relevant details.
@@ -29,49 +29,45 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/ConnectivityNode"
+  /lightning/nodes/rankings/connectivity:
+    get:
+      summary: Get rankings of Lightning Network nodes by Connectivity
+      description: Retrieve a list of Lightning Network nodes ranked by their Connectivity, along with relevant details.
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ConnectivityNode"
 
 components:
   schemas:
     ConnectivityNode:
       type: object
       properties:
-        public_key:
+        publicKey:
           type: string
           description: The public key identifying the Lightning Network node.
+        alias:
+          type: string
+          description: A human-readable alias for the node.
         capacity:
           type: integer
           description: The total capacity of the node in satoshis.
         channels:
           type: integer
           description: The number of channels the node has open.
-        alias:
-          type: string
-          description: A human-readable alias for the node.
-        first_seen:
+        firstSeen:
           type: integer
           description: The timestamp when the node was first seen.
-        updated_at:
+        updatedAt:
           type: integer
           description: The timestamp when the node's information was last updated.
         city:
-          type: object
-          properties:
-            de:
-              type: string
-            en:
-              type: string
-            es:
-              type: string
-            fr:
-              type: string
-            ja:
-              type: string
-            pt-BR:
-              type: string
-            ru:
-              type: string
-            zh-CN:
-              type: string
+          type: string
           description: The city where the node is located, if available.
         country:
           type: object
@@ -97,18 +93,5 @@ components:
           type: string
           description: The ISO code of the country where the node is located.
         subdivision:
-          type: object
-          properties:
-            de:
-              type: string
-            en:
-              type: string
-            fr:
-              type: string
+          type: string
           description: The subdivision (e.g., state or province) where the node is located, if available.
-        longitude:
-          type: number
-          description: The longitude coordinate of the node's location.
-        latitude:
-          type: number
-          description: The latitude coordinate of the node's location.
