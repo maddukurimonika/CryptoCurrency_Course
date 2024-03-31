@@ -10,7 +10,7 @@ paths:
       parameters:
         - in: path
           name: number
-          required: true
+          required: false
           schema:
             type: integer
           description: The number to be used in the path.
